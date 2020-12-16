@@ -1,0 +1,267 @@
+#:import utils kivy.utils
+<Button>
+    size_hint: (0.3, 0.2)
+    font_size: 16
+    #background_color: 0, 0, 0, 0.5
+    color: ("#000000")
+    bold: True
+    italic: False    
+    background_normal: ""
+    background_color: ("#fa4737")
+
+<MenuScr>
+    FloatLayout:
+        spacing: 20
+        padding: 10
+        size: root.width, root.height
+        
+        Label: 
+            text: "What do you wish to convert from?"
+            size_hint: (1, 1)
+            background_normal: ''
+            background_color: ("#fa4737")
+            bold: True
+            italic: False
+            pos_hint: {"top": 1} #"x", "y", "top", "bottom", "left", "right"
+
+        Button:
+            text: "Unsigned Binary"
+            pos_hint: {"right":0.325, "top": 0.75} #"x", "y", "top", "bottom", "left", "right"
+            on_release:
+                root.manager.current='CalculationScreenUnsignedBinary'
+                root.manager.transition.direction = 'up'
+
+        Button: 
+            text: "Sign & Magnitude"
+            pos_hint: {"right":0.65, "top":0.75} #"x", "y", "top", "bottom", "left", "right"
+            # on_release:
+            #     root.manager.current='CalculationScreen'
+            #     root.manager.transition.direction = 'right'
+
+        Button: 
+            text: "Twos Complement"
+            pos_hint: {"right":0.975, "top":0.75} #"x", "y", "top", "bottom", "left", "right"
+            # on_release:
+            #     root.manager.current='CalculationScreen'
+            #     root.manager.transition.direction = 'right'
+
+        Button: 
+            text: "Denary"
+            pos_hint: {"right":0.4875, "top":0.45} #"x", "y", "top", "bottom", "left", "right"
+            on_release:
+                root.manager.current='CalculationScreenDenary'
+                root.manager.transition.direction = 'up'
+
+        Button: 
+            text: "Hexadecimal"
+            pos_hint: {"right":0.8125, "top":0.45} #"x", "y", "top", "bottom", "left", "right",
+            # on_release:
+            #     root.manager.current='CalculationScreen'
+            #     root.manager.transition.direction = 'right'
+
+<CalcScrUnsigBin>
+    FloatLayout:
+        padding: 150
+        spacing: 50
+        size: root.width, root.height
+
+        TextInput:
+            id: UnsigBinInput
+            text: "Enter your Unsigned Binary Number"
+            size_hint: (0.41, 0.2)
+            halign: "right"
+            input_filter: "int"
+            readonly: True
+            cursor_blink: False
+            cursor_color: ("#FFFFFF")
+            background_color: ("#FFFFFF")
+            pos_hint: {"top": 0.845, "x": 0.01}
+        
+        Button:
+            text: "1" #W/H
+            size_hint: (0.2, 0.2)
+            pos_hint: {"top": 0.645, "x": 0.01}
+            on_release: root.UnsignedBinaryInputs(self.text)
+        
+        Button:
+            text: "0"
+            size_hint: (0.2, 0.2)
+            pos_hint: {"top": 0.645, "x": 0.22}
+            on_release: root.UnsignedBinaryInputs(self.text)
+        
+        Button:
+            text: "Submit"
+            size_hint: (0.41, 0.2)
+            pos_hint: {"top": 0.435, "x": 0.01}
+            on_release: pass
+            background_normal: ""
+            background_color: ("#00ff00")
+            on_release: root.SubmitUnsignedBinary()
+        
+        Label:
+            text: "|"
+            font_size: 100
+        ###########################
+        # Label:
+        #     text: "Sign & Magnitude:"
+        #     font_size: 20
+        #     pos_hint: {"top": 1.3, "x": 0.15}
+        
+        # Label:
+        #     text: "Two's Complement:"
+        #     font_size: 20
+        #     pos_hint: {"top": 1.1, "x": 0.15}
+        
+        Label:
+            id: UnsignedBinaryDenary
+            text: "Denary: "
+            font_size: 20
+            pos_hint: {"top": 1.1, "x": 0.15}
+        
+        Label:
+            id: UnsignedBinaryHexadecimal
+            text: "Hexadecimal: "
+            font_size: 20
+            pos_hint: {"top": 0.9, "x": 0.15}        
+            
+        Button:
+            text: "Go Back to main menu"
+            pos_hint: {"y": 0.01, "x": 0.35} #"x", "y", "top", "bottom", "left", "right"
+            on_release:
+                root.manager.current='MenuScreen'
+                root.manager.transition.direction = 'down'
+
+
+<CalcScrDen>
+    FloatLayout:
+        padding: 150
+        spacing: 50
+        size: root.width, root.height
+
+        TextInput:
+            id: DenaryInput
+            text: "Enter your Denary Number"
+            size_hint: (0.40, 0.2)
+            halign: "center"
+            input_filter: "int"
+            readonly: True
+            cursor_blink: False
+            cursor_color: ("#FFFFFF")
+            background_color: ("#FFFFFF")
+            pos_hint: {"top": 0.845, "x": 0.01}
+        
+        Button:
+            text: "+/-" #W/H
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.645, "x": 0.01}
+            on_release: root.DenaryInputsNegative("-")
+        
+        Button:
+            text: "9"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.645, "x": 0.145}
+            on_release: root.DenaryInputs(self.text)
+        
+        Button:
+            text: "8"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.645, "x": 0.28}
+            on_release: root.DenaryInputs(self.text)
+        #################
+        Button:
+            text: "7"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.534, "x": 0.01}
+            on_release: root.DenaryInputs(self.text)
+    
+        Button:
+            text: "6"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.534, "x": 0.145}
+            on_release: root.DenaryInputs(self.text)
+        
+        Button:
+            text: "5"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.534, "x": 0.28}
+            on_release: root.DenaryInputs(self.text)
+        #################
+        Button:
+            text: "4"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.423, "x": 0.01}
+            on_release: root.DenaryInputs(self.text)
+        
+        Button:
+            text: "3"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.423, "x": 0.145}
+            on_release: root.DenaryInputs(self.text)
+        
+        Button:
+            text: "2"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.423, "x": 0.28}
+            on_release: root.DenaryInputs(self.text)
+        #################
+        Button:
+            text: "1"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.312, "x": 0.01}
+            on_release: root.DenaryInputs(self.text)
+
+        Button:
+            text: "0"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.312, "x": 0.145}
+            on_release: root.DenaryInputs(self.text)
+
+        Button:
+            text: u"\u00AB"
+            size_hint: (0.13, 0.1)
+            pos_hint: {"top": 0.312, "x": 0.28}
+            on_release: root.RemoveADigit()
+        #################
+        Button:
+            text: "Submit"
+            size_hint: (0.40, 0.1)
+            pos_hint: {"top": 0.201, "x": 0.01}
+            on_release: pass
+            background_normal: ""
+            background_color: ("#00ff00")
+            on_release: root.DenarySubmit()
+        
+        Label:
+            text: "|"
+            font_size: 100
+        ##########################
+        Label:
+            id: DenaryUnsignedBinary
+            text: "Unsigned Binary: "
+            font_size: 20
+            pos_hint: {"top": 1.3, "x": 0.15}
+        
+        Label:
+            id: DenarySignMagnitude
+            text: "Sign & Magnitude: "
+            font_size: 20
+            pos_hint: {"top": 1.1, "x": 0.15}
+        
+        Label:
+            id: DenaryTwoComplement
+            text: "Two's Complement: "
+            font_size: 20
+            pos_hint: {"top": 0.9, "x": 0.15}
+        
+        Label:
+            id: DenaryHexadecimal
+            text: "Hexadecimal: "
+            font_size: 20
+            pos_hint: {"top": 0.7, "x": 0.15}        
+            
+        # Button:
+        #     text: "Go Back to main menu"
+        #     pos_hint: {"y": 0.01, "x": 0.35} #"x", "y", "top", "bottom", "left", "right"
+        #     on_release:
+        #         root.manager.current='MenuScreen'
+        #         root.manager.transition.direction = 'down'
